@@ -1,1 +1,27 @@
+name: Gerar Documentação PDF
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Gerar Doxygen + Compilar LaTeX para PDF
+        uses: mattnotmitt/doxygen-action@v1.13.2
+        with:
+          doxyfile-path: './Doxyfile'
+          enable-latex: true
+
+      - name: Salvar PDF para download (Artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentacao-pdf
+          path: latex/refman.pdf
 
