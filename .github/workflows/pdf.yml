@@ -1,12 +1,16 @@
-name: Gerar Documentação PDF
+name: Publicar Documentação PDF na Release
 
 on:
   push:
-    branches: [ main, master ]
-  workflow_dispatch:
+    tags:
+      - 'v*' # Dispara sempre que você enviar uma tag começando com "v" (ex: v1.0.0)
+
+# Permissão necessária para criar a Release e anexar arquivos
+permissions:
+  contents: write
 
 jobs:
-  build-pdf:
+  release-pdf:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,9 +23,9 @@ jobs:
           doxyfile-path: './Doxyfile'
           enable-latex: true
 
-      - name: Salvar PDF para download (Artifact)
-        uses: actions/upload-artifact@v4
+      - name: Criar Release e anexar PDF
+        uses: softprops/action-gh-release@v2
         with:
-          name: documentacao-pdf
-          path: latex/refman.pdf
+          files: latex/refman.pdf
+          generate_release_notes: true
 
