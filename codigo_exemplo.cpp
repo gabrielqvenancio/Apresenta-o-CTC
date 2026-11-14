@@ -135,6 +135,12 @@ public:
      */
     void atacar(Entidade& alvo) override;
 
+    /**
+     * @brief Desabilita os efeitos da gravidade.
+     * @param tempoLimite Tempo máximo de voo.
+     */
+    void voar(float tempoLimite);
+
 private:
     int poderFogo;
 };
