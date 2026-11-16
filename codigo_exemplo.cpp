@@ -111,6 +111,12 @@ public:
      */
     void atacar(Entidade& alvo) override;
 
+    /**
+     * @brief Defender o ataque do alvo.
+     * @param alvo Entidade que atacou o guerreiro.
+     */
+    void defender(Entidade& alvo);
+
 private:
     int forca;
     Arma* armaEquipada = nullptr;
